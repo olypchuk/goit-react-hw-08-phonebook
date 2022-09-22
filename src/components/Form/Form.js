@@ -7,7 +7,7 @@ import * as yup from 'yup'
 import { useDispatch,useSelector } from "react-redux";
 import { fetchAddContacts } from "redux/contacts-operations";
 import { getContacts } from "redux/selectors";
-// import { Notify } from "notiflix";
+import { Notify } from "notiflix";
 
 const schema = yup.object().shape({
   name: yup.string()
@@ -16,7 +16,7 @@ const schema = yup.object().shape({
     .required("Please enter name")
     .matches(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/, "Must be only letters"),
 
-  phone: yup.string()
+  number: yup.string()
     .required('Please enter number')
     .min(6)
     .max(15)
@@ -27,7 +27,7 @@ const schema = yup.object().shape({
 
 export const INITIAL_STATE = {
   name: '',
-  phone: ''
+  number: ''
 }
 
 let showId = shortid.generate()  
@@ -35,12 +35,20 @@ let showId = shortid.generate()
 export const FormByFormik = () => {
 
   const dispatch = useDispatch()
-  const { contacts } = useSelector(getContacts)
+  const  contacts  = useSelector(getContacts)
+
 
   const handleSubmit = (payload, { resetForm }) => {
+try {
+     dispatch(fetchAddContacts(payload))
+  resetForm()
 
-        dispatch(fetchAddContacts(payload))
-        resetForm()
+  return contacts
+} catch (error) {
+  Notify.error('You could not added contact' )
+}
+     
+    
         return contacts
       
   }
@@ -57,14 +65,14 @@ export const FormByFormik = () => {
         placeholder="enter name"
         />
       <ErrorMessage name="name"/>
-     <label htmlFor="phone">Number</label> 
+     <label htmlFor="number">Number</label> 
           <Field
         id={showId}
         type="tel"
-        name="phone"
+        name="number"
         placeholder="enter number"
         />
-      <ErrorMessage name="phone"/>
+      <ErrorMessage name="number"/>
         <FormButton type="submit">add contact</FormButton>
   </FormStyled>
 </Formik>)

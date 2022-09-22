@@ -55,7 +55,8 @@ export const contactsSlice = createSlice({
     [fetchAddContacts.fulfilled]: (store, { payload }) => {
    
       store.loading = false;
-      store.contacts.push(payload)
+      store.contacts=[...store.contacts,payload]
+      // store.contacts=payload
     },
     [fetchAddContacts.rejected]: (store, { payload }) => {
       store.loading = false;

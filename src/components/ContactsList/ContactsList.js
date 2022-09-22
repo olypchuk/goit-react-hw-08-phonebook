@@ -4,8 +4,8 @@ export const ContactsList = ({ data,onClick }) => {
 
   return <StyledUl>
     {data?.map(item => { 
-      const { name, phone,id } = item;
-        return <StyledContainer key={id} ><li>{name}<p>{phone}</p>
+      const { name, number,id } = item;
+        return <StyledContainer key={id} ><li>{name}<p>{number}</p>
        </li><button type="button" onClick={()=>onClick(id)}>delete</button></StyledContainer>
     })}
           
@@ -36,10 +36,10 @@ const StyledContainer=styled.div`
     `
 ContactsList.propTypes = {
   data: PropTypes.arrayOf(PropTypes.exact({
-  createdAt:PropTypes.string.isRequired,
+
   id:PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  phone:PropTypes.string.isRequired
+  number:PropTypes.string.isRequired
   })),
   onClick:PropTypes.func.isRequired
     }

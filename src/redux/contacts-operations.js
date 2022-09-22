@@ -17,9 +17,9 @@ export const fetchAllContacts = createAsyncThunk(
 export const fetchAddContacts = createAsyncThunk(
   'contacts/fetchAddContacts',
   async (store, thunkAPI) => {
-   
     try {    
       const response = await fetchContactsAdd(store)
+      console.log('response', response)
       return response
     } catch (error) {
        return thunkAPI.rejectWithValue(error)
@@ -28,13 +28,15 @@ export const fetchAddContacts = createAsyncThunk(
   {
     condition: (store, { getState }) => {
     
-      const { contacts  }  = getState()
-      const arrOfContacts = contacts.items.contacts
+      const { contacts }= getState()
+     
+      const arrOfContacts = contacts.contacts
       const findSameNumber=arrOfContacts?.find(contact=>contact.name.toLowerCase()===store.name.toLowerCase())
           if (findSameNumber) {
             Notify.failure("this name already in list")
             return false
-    } 
+      } 
+        Notify.success('you added contact')
     }
   }
 )
