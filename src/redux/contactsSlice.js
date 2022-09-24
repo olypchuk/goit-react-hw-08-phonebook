@@ -1,31 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchAllContacts,fetchAddContacts ,fetchDeleteContacts} from "./contacts-operations";
 
-// export const contactsSlice = createSlice({
-//   name: 'items',
-//   initialState: [],
-//   reducers: {
-//     ADD_CONTACTS: {
-//       reducer: (state, { payload }) => {
-//         state.push(payload)
-//       },
-//       prepare: (data) => {
-//         return {
-//           payload: {
-//             ...data,
-//             id: shortid.generate()
-//           }
-//         }
-    
-//       }
-
-//     },
-//     REMOVE_CONTACTS:{
-//       reducer:(state,{payload})=>state.filter(({ id }) => id !== payload)
-//     }
-//   }
-// }
-// )
 const initialState = {
   contacts: [],
   loading: false,
@@ -80,3 +55,31 @@ export const contactsSlice = createSlice({
 
 
 export default contactsSlice.reducer
+
+
+
+// export const contactsSlice = createSlice({
+//   name: 'items',
+//   initialState: [],
+//   reducers: {
+//     ADD_CONTACTS: {
+//       reducer: (state, { payload }) => {
+//         state.push(payload)
+//       },
+//       prepare: (data) => {
+//         return {
+//           payload: {
+//             ...data,
+//             id: shortid.generate()
+//           }
+//         }
+    
+//       }
+
+//     },
+//     REMOVE_CONTACTS:{
+//       reducer:(state,{payload})=>state.filter(({ id }) => id !== payload)
+//     }
+//   }
+// }
+// )

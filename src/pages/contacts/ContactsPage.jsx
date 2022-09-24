@@ -6,8 +6,8 @@ import { FormByFormik } from "components/Form/Form";
 import { useDispatch ,useSelector} from "react-redux";
 import { setFilter } from "redux/filterSlice";
 import { filterHandleChange, getContacts, filterContacts, sortedContactsFunction } from "redux/selectors";
-import { fetchDeleteContacts,fetchAllContacts } from "redux/contacts-operations";
-import { Notify } from "notiflix";
+import { fetchAllContacts } from "redux/contacts-operations";
+
 const ContactsPage = () => {
     
   const filter  = useSelector(filterContacts)
@@ -23,17 +23,19 @@ dispatch(fetchAllContacts())
 
 
   const setFilterContacts = (e) => dispatch(setFilter(e.target.value))
-  const deleteContacts = id => {
+  // const deleteContacts = id => {
     
-    dispatch(fetchDeleteContacts(id))
-    Notify.success('contact was deleted ')
-  }
+  //   dispatch(fetchDeleteContacts(id))
+  //   Notify.success('contact was deleted ')
+  // }
   return (<>
 
     <h2>Contacts</h2>
     <FormByFormik />
     <Filter onChange={setFilterContacts} value={filter} />
     
-         {contacts.length>0&&<ContactsList data={filteredArray} onClick={deleteContacts} /> }</>)
+    {contacts.length > 0 && <ContactsList data={filteredArray}
+      // onClick={deleteContacts}
+    />}</>)
 }
 export default ContactsPage

@@ -19,7 +19,6 @@ export const fetchAddContacts = createAsyncThunk(
   async (store, thunkAPI) => {
     try {    
       const response = await fetchContactsAdd(store)
-      console.log('response', response)
       return response
     } catch (error) {
        return thunkAPI.rejectWithValue(error)

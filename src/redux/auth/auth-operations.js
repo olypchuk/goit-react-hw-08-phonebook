@@ -11,6 +11,11 @@ export const loginUser = createAsyncThunk(
             console.log('error :>> ', error);
             return thunkAPI.rejectWithValue(error)
         }
+    },
+    {
+        condition: (store, { getState }) => {
+            
+        }
     }
 )
 export const signUpUser = createAsyncThunk(
@@ -39,16 +44,16 @@ export const logoutUser = createAsyncThunk(
 )
 export const currentUser = createAsyncThunk(
     'users/currentUser',
-    async (_, thunkAPI,{getState}) => {
+    async (_, {rejectWithValue,getState}) => {
         try {
             const { auth } = getState()
-  
+  if(!auth.token)return rejectWithValue()
              const res = await current(auth.token)
           
             return res
         } catch (error) {
             console.log('error :>> ', error);
-           return thunkAPI.rejectWithValue(error)
+           return rejectWithValue(error)
         }
     }
 )

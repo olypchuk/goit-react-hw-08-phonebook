@@ -1,16 +1,55 @@
 import { Suspense } from "react"
 import { Outlet } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import UserMenu from "components/UserMenu/UserMenu";
+import { isLoggedIn } from "redux/auth/authSelectors";
+import { useSelector } from "react-redux";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { LinkContainer } from 'react-router-bootstrap';
+
 const SharedLayout = () => {
+
+const isSuccess = useSelector(isLoggedIn)
     return (<>
-        <NavLink to='/'>Phonebook</NavLink>
-        <NavLink to='login'>login</NavLink>
-        <NavLink to='register'>register</NavLink>
-         <Suspense fallback={<p>loading.....</p>}>
-      <Outlet />
-        </Suspense>
+          <Navbar  bg="light" className="navbar-width " >
+          <Container >
+          <Nav className="justify-content-end">
+
+          {isSuccess ? < UserMenu /> :<><LinkContainer to="login">
+          <Nav.Link href="login">login</Nav.Link>  
+          </LinkContainer>
+          <LinkContainer to="register">
+          <Nav.Link href="register">register</Nav.Link>
+          </LinkContainer></> 
+          } 
+
+          </Nav>
+          </Container>
+          </Navbar>
+          <Suspense fallback={<p>loading.....</p>}>
+          <Outlet />
+          </Suspense>
     </> 
     );
 }
 
 export default SharedLayout;
+
+
+// function ColorSchemesExample() {
+//     const isSuccess = useSelector(isLoggedIn)
+//   return (
+//     <>
+//     <NavLink to='/'>Phonebook</NavLink>
+//        {isSuccess? < UserMenu/>:<><NavLink to='login'>login</NavLink>
+//         <NavLink to='register'>register</NavLink></>} 
+      
+        
+//          <Suspense fallback={<p>loading.....</p>}>
+//       <Outlet />
+//         </Suspense>
+      
+//     </>
+//   );
+// }

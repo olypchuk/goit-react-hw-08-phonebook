@@ -1,16 +1,15 @@
 import styled from "styled-components";
 import { PropTypes } from "prop-types";
-export const ContactsList = ({ data,onClick }) => {
+import { Contact } from "components/Contact/Contact";
 
+export const ContactsList = ({ data}) => {
   return <StyledUl>
-    {data?.map(item => { 
-      const { name, number,id } = item;
-        return <StyledContainer key={id} ><li>{name}<p>{number}</p>
-       </li><button type="button" onClick={()=>onClick(id)}>delete</button></StyledContainer>
-    })}
-          
+    {data.map(item => (<Contact key={item.id} {...item} />))}
   </StyledUl>
 }
+
+
+
 const StyledUl = styled.ul`
 display:flex;
 flex-wrap: wrap;
@@ -19,27 +18,29 @@ justify-content: center;
 padding: 0;
 
 `
-const StyledContainer=styled.div`
-    display:flex;
-    align-items: center;
-    padding :10px ;
-    flex-direction: column;
-    text-align: center;
-    width: 300px;
-    height: 100%;
-    margin: 10px;
-    border: 20px;
-    border-radius: 15px;
-    &:hover{
-    background-color: rgba(129,52,175,1);
-    }
-    `
-ContactsList.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.exact({
 
-  id:PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  number:PropTypes.string.isRequired
-  })),
-  onClick:PropTypes.func.isRequired
-    }
+ContactsList.propTypes = {
+  data: PropTypes.array.isRequired,
+
+}
+    
+// export const ContactsList = ({ data,onClick }) => {
+//   const Loading = useSelector(isLoadingContact)
+
+//   return <StyledUl>
+//     {data?.map(item => { 
+//       const { name, number,id } = item;
+//         return <StyledContainer key={id} ><li>{name}<p>{number}</p>
+//        </li><Button type="button" onClick={()=>onClick(id)}>{Loading &&
+//               <Spinner
+//           as="span"
+//           animation="grow"
+//           size="sm"
+//           role="status"
+//           aria-hidden="true"
+//         />  
+//             }delete</Button></StyledContainer>
+//     })}
+          
+//   </StyledUl>
+// }
