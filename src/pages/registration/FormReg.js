@@ -45,7 +45,7 @@ const Loading=useSelector(isLoading)
 
   try {
     dispatch(signUpUser(payload))
-    Notify.success("you are signed up!")
+    
   } catch (error) {
     Notify.error('You canot register')
   console.log('error', error)

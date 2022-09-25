@@ -1,13 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { login, signUp, logOut, current } from "components/services/userApi";
-
+import { Notify } from "notiflix";
 export const loginUser = createAsyncThunk(
     'users/loginUser',
     async (store,thunkAPI) => {
         try {
             const res = await login(store)
+            Notify.success("You are logged in!")
             return res
         } catch (error) {
+            Notify.failure(error.message)
             console.log('error :>> ', error);
             return thunkAPI.rejectWithValue(error)
         }
@@ -23,8 +25,10 @@ export const signUpUser = createAsyncThunk(
     async (store,thunkAPI) => {
         try {
             const res = await signUp(store)
+              Notify.success("You are signUp!")
             return res
         } catch (error) {
+              Notify.failure(error.message)
             console.log('error :>> ', error);
            return thunkAPI.rejectWithValue(error)
         }

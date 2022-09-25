@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { Outlet } from "react-router-dom";
+import { Outlet} from "react-router-dom";
 import UserMenu from "components/UserMenu/UserMenu";
 import { isLoggedIn } from "redux/auth/authSelectors";
 import { useSelector } from "react-redux";
@@ -25,9 +25,12 @@ const isSuccess = useSelector(isLoggedIn)
           } 
 
           </Nav>
-          </Container>
-          </Navbar>
-          <Suspense fallback={<p>loading.....</p>}>
+            </Container>
+           
+        </Navbar>
+   
+        <Suspense fallback={<p>loading.....</p>}>
+           
           <Outlet />
           </Suspense>
     </> 
@@ -35,7 +38,7 @@ const isSuccess = useSelector(isLoggedIn)
 }
 
 export default SharedLayout;
-
+export const Home=()=><><h1>Phonebook</h1><h2>Please login or register for use this App</h2></>
 
 // function ColorSchemesExample() {
 //     const isSuccess = useSelector(isLoggedIn)

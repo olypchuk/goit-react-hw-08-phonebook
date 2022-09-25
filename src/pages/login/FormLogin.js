@@ -40,7 +40,7 @@ const Loading=useSelector(isLoading)
   
     try {
 dispatch(loginUser(payload))
- Notify.success("You are logged in!")
+ 
     } catch (error) {
       Notify.error('cannot login')
     }

@@ -4,7 +4,7 @@ import { lazy,Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import SharedLayout from "components/SharedLayout/SharedLayout";
-
+import { Home } from "components/SharedLayout/SharedLayout";
 const RegistrationPage = lazy(() => import('../../pages/registration/Registration'))
 const LoginPage = lazy(() => import('../../pages/login/Login'))
 const ContactsPage = lazy(() => import('../../pages/contacts/ContactsPage'))
@@ -15,8 +15,10 @@ const ContactsRoutes = () => {
         <>
         <Suspense fallback={<p>....Load page</p>}>
 
-            <Routes>
-              <Route path='/' element={<SharedLayout/>} >
+                <Routes>
+                   
+                    <Route path='/' element={<SharedLayout />} >
+                     <Route index element={<Home/>}/>
             <Route element={<PublicRoute/>}>
 
             <Route path='register' element={<RegistrationPage />} />
@@ -26,7 +28,8 @@ const ContactsRoutes = () => {
                    <Route path='contacts' element={<ContactsPage />} />   
                     </Route>
                  <Route path='*' element={<Navigate to="/"/>}/>
-          </Route>
+                        </Route>
+                       
          </Routes >
             </Suspense><Outlet />
         </>
