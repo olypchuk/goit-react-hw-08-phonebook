@@ -15,6 +15,7 @@ const UserContainer=styled.div`
 `
 const UserMenu = () => {
     const user = useSelector(getUser)
+    console.log('user :>> ', user);
     const Loading = useSelector(isLoading)
     const isSuccess = useSelector(isLoggedIn)
     const dispatch=useDispatch()
@@ -23,8 +24,8 @@ const UserMenu = () => {
     Notify.success("You are lougout")
 }
     return (<>
-        {isSuccess &&
-        <UserContainer>{user.email}
+        {isSuccess &&user&&
+        <UserContainer>{user?.email}
 
         <Button type="button" onClick={onLogout}>logout{Loading &&
         <Spinner
