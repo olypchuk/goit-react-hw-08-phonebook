@@ -15,7 +15,7 @@ const UserContainer=styled.div`
 `
 const UserMenu = () => {
     const user = useSelector(getUser)
-    console.log('user :>> ', user);
+  
     const Loading = useSelector(isLoading)
     const isSuccess = useSelector(isLoggedIn)
     const dispatch=useDispatch()
